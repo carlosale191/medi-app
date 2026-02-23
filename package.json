@@ -1,0 +1,16 @@
+{
+  "name": "mediapp",
+  "version": "1.0.0",
+  "description": "mini projeto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos Alessandro",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^8.22.0"
+  }
+}
