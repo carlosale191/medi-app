@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_light
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    # --- Seção de Limitação de Recursos ---
+    deploy:
+      resources:
+        limits:
+          memory: 300M # Limite máximo (o container não passa disso)
+          #cpus: '0.50'    # Limita o uso de CPU a 50% de um núcleo
+        reservations:
+          memory: 128M # Reserva mínima de RAM ao iniciar
+
+#evita reset do banco
+volumes:
+  mongo_data:
