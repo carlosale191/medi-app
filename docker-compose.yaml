@@ -19,6 +19,6 @@ services:
         reservations:
           memory: 128M # Reserva mínima de RAM ao iniciar
 
-#evita reset do banco
+#evita reset do db
 volumes:
   mongo_data:
