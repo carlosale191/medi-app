@@ -1,4 +1,4 @@
-import Doctor from '..models/Doctor.js'
+import Doctor from '../models/Doctor.js'
 
 const getAllDoctors = async () => {
     try {
@@ -42,12 +42,22 @@ const deleteDoctor = async (id) => {
     }
 }
 
+//login
+const getDoctorByLogin = async (login) => {
+    try {
+        return await Doctor.findOne({ "login": login });
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
 const doctorRepository = {
     getAllDoctors,
     getDoctor,
     saveDoctor,
     updateDoctor,
-    deleteDoctor
+    deleteDoctor,
+    getDoctorByLogin
 }
 
 export default doctorRepository;

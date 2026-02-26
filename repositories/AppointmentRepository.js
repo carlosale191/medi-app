@@ -1,10 +1,10 @@
-import Appointment from "..models/Appointment.js";
+import Appointment from "../models/Appointment.js";
 
 const getAllAppointments = async () => {
     try {
         return await Appointment.find();
     } catch (error) {
-        throw new Error(erro);
+        throw new Error(error);
     }
 }
 

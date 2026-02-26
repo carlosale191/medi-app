@@ -18,7 +18,13 @@ const pacientSchema = new Schema({
     },
     phone: {
         type: String,
-        required: [true, 'Telefone necessário.']
+        required: [true, 'Telefone necessário.'],
+        validate: {
+          validator: function (v) {
+            return /\d{2} 9\d{4}-\d{4}/.test(v);
+          },
+          message:props => `${props.value} Telefone inválido. Use um número no formato 99-91234-9999`
+        }
     },
     createdAt: {
         type: Date,

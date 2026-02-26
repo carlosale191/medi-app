@@ -9,7 +9,7 @@ const prescriptionSchema = new Schema({
         default: null
     },
     appointmentId: {
-        type: Int32Array,
+        type: String,
         required: [true, 'ID de consulta necessário.']
     },
     medicine: {
