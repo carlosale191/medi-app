@@ -1,7 +1,50 @@
 import express from 'express';
 import PrescriptionService from '../services/PrescriptionService.js';
+import multer from 'multer';
+import process from 'process';
+import path from 'path';
 
 let router = express.Router();
+
+const storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+        cb(null, "./MediApp/prescriptions");
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/uploadPrescription/:id', upload.single('file'), async (req, res) => {
+    try {
+        const { id } = req.params;
+        let prescription = await PrescriptionService.getPrescription(id);
+
+        const file = "./MediApp/prescriptions" + req.file.originalname;
+        prescription = await PrescriptionService.updatePrescription(id, { file });
+
+        return res.status(200).send(prescription);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+});
+
+router.get('/readPrescription/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const prescription = await PrescriptionService.getPrescription(id);
+        let filePath = path.resolve(process.cwd() + "/../" + prescription.file); //pega diretório atual, volta duas pastas e encontra arquivo
+        res.status(200).sendFile(filePath);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+})
 
 router.get('/prescriptions', async (req, res) => {
     try {
@@ -60,5 +103,17 @@ router.delete('/prescriptions/:id', async (req, res) => {
     }
 });
 
+//gera arquivo
+router.get('/generatePrescription/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const prescription = await PrescriptionService.getPrescription(id);
+        const generatePrescription = await PrescriptionService.generatePrescriptionFile(prescription);
+        res.send(generatePrescription);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+})
 
 export default router;
