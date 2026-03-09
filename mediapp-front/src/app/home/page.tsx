@@ -20,6 +20,9 @@ export default function Home() {
                 <Link href="/prescription/create">Create new prescription</Link>
                 <br></br>
                 <Link href="/prescription/upload">Upload prescription</Link>
+                <br></br>
+                <br></br>
+                <Link href="/fake">Fake API</Link>
             </div>
         </>
     );
