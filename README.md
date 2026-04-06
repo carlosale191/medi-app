@@ -10,4 +10,4 @@ API RESTful de uma clínica médica, controlando informações de pacientes, mé
 - Docker
 - Multer
 - Bcrypt
-Para mais detalhes verificar arquivo package.json.
+Para mais detalhes verificar [configurações](/MediApp/src/package.json).
